@@ -1,9 +1,17 @@
 class Person:
-    def __init__(self):
-        pass
+    number_of_people = 0  # class attribute
 
-    def set_name(self, name):
+    def __init__(self, name: str, address: int):
         self.name = name
+        self.address = address
+        Person.add_person()
+
+    @classmethod
+    def add_person(cls):
+        cls.number_of_people += 1
+
+    def say_your_name(self):
+        print(f"Hi, my name is {self.name}")
 
     def set_age(self, age):
         if isinstance(age, int):
@@ -32,15 +40,20 @@ class Latino(
         print(f"I am latino, my name is {self.name} and I'm {self.age} years old")
 
 
-fer = Latino()
-fer.set_name("fer")
-fer.set_age(33)
-fer.speak()
+class Nordic(Person):
+    def __init__(self, name, address, eye_color: str):
+        super().__init__(name, address)
+        # super calls the parent class
+        # super method ensure the inheritance of the parent class while adding initial parametrization
+        self.eye_color = eye_color
 
-kaja = Person()
-kaja.set_name("kaja")
-kaja.set_age(38)
-kaja.speak()
+
+fer = Latino("fer", 33)
+kaja = Person("kajs", "bajs")
+
+# since number of people is a class attribute, it can be used both with an instance or the general class
+print(fer.number_of_people)
+print(Person.number_of_people)
 
 
 class Course:
